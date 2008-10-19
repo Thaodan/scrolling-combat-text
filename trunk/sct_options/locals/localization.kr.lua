@@ -34,6 +34,7 @@ SCT.LOCALS.OPTION_EVENT22 = {name = "숙련도", tooltipText = "기술에 대한
 SCT.LOCALS.OPTION_EVENT23 = {name = "마무리공격", tooltipText = "대상에게 마지막 공격을 가해 죽였을 때 메시지를 표시합니다."};
 SCT.LOCALS.OPTION_EVENT24 = {name = "중단", tooltipText = "주문 시전의 중단 메시지를 표시합니다."};
 SCT.LOCALS.OPTION_EVENT25 = {name = "해제", tooltipText = "해제 메시지를 표시합니다."};
+SCT.LOCALS.OPTION_EVENT26 = {name = "룬", tooltipText = "룬 준비완료 메시지를 표시합니다."};
 
 --Check Button option values
 SCT.LOCALS.OPTION_CHECK1 = { name = "SCT 사용", tooltipText = "전투 메시지 확장 기능을 사용합니다."};
