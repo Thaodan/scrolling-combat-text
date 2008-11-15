@@ -89,13 +89,15 @@ end
 --Start Nameplate tracking
 function SCT:EnableNameplate()
 	self:CreateUnitUpdate();
-	ShowFriendNameplates();
-	FRIENDNAMEPLATES_ON = true;
+	SetCVar("nameplateShowFriends", "1")
+	--ShowFriendNameplates();
+	--FRIENDNAMEPLATES_ON = true;
 end
 
 ----------------------
 --Start Nameplate tracking
 function SCT:DisableNameplate()
-	HideFriendNameplates();
-	FRIENDNAMEPLATES_ON = false;
+  SetCVar("nameplateShowFriends", "0")
+	--HideFriendNameplates();
+	--FRIENDNAMEPLATES_ON = false;
 end
