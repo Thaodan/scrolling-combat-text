@@ -15,6 +15,7 @@ embeds.xml
 sct.xml
 sct.lua
 locals\localization.lua
+locals\localization.ru.lua
 locals\localization.de.lua
 locals\localization.fr.lua
 locals\localization.es.lua
