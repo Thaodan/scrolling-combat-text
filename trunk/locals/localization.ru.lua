@@ -1,18 +1,5 @@
-﻿--Version
-SCT.Version = "6.31";
-
---Locals
-SCT.LOCALS = {}
-SCT.LOCALS.EXAMPLE = "SCT";
-SCT.LOCALS.EXAMPLE2 = "SCT2";
-SCT.LOCALS.MSG_EXAMPLE = "SCT Message";
-
---Everything From here on would need to be translated and put
---into if statements for each specific language.
-
---***********
---ENGLISH
---***********
+﻿
+if GetLocale() ~= "ruRU" then return end 
 
 -- Static Messages
 SCT.LOCALS.LowHP= "Мало здоровья!";					-- Message to be displayed when HP is low
