@@ -511,7 +511,7 @@ function SCT:ParseCombat(arg1, timestamp, event, sourceGUID, sourceName, sourceF
     end
   ------------heals----------------
   elseif etype == "HEAL" then
-    spellId, spellName, spellSchool, amount, overHeal, critical = select(1, ...)
+    spellId, spellName, spellSchool, amount, overHeal, absorbed, critical = select(1, ...)
     text = amount
     texture = select(3, GetSpellInfo(spellId))
 
