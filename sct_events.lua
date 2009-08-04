@@ -347,9 +347,9 @@ end
 function SCT:CheckSelfDebuff(spellName, unit)
   local i = 1
   while true do
-    local name, rank, icon, count, dispelType, duration, timeLeft = UnitDebuff(unit, i)
+    local name, rank, icon, count, dispelType, duration, timeLeft, caster = UnitDebuff(unit, i)
     if not name then break end
-    if name == spellName and timeLeft then
+    if name == spellName and caster == "player" then
       return true
     end
     i = i + 1
