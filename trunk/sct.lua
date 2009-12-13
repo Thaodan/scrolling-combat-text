@@ -739,7 +739,7 @@ end
 --Displays a message at the top of the screen
 function SCT:DisplayMessage(msg, color, icon)
     self:SetMsgFont(SCT_MSG_FRAME)
-    if icon and db["ICON"] then msg = "|T"..icon..":"..(db[self.FRAMES_DATA_TABLE][SCT.MSG]["MSGSIZE"]*1.5).."|t"..msg end
+    if icon and db["ICON"] then msg = "|T"..icon..":"..(db[self.FRAMES_DATA_TABLE][SCT.MSG]["MSGSIZE"]).."|t"..msg end
     SCT_MSG_FRAME:AddMessage(msg, color.r, color.g, color.b, 1)
 end
 

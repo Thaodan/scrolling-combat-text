@@ -10,7 +10,7 @@ SCT.UnitPlates = {};
 local function FindHealthBar( ... )
     for i=1,select( '#', ... ) do
         local healthBar = select( i, ... );
-        if( healthBar and not healthBar.SCTHooked and healthBar.GetFrameType and healthBar:GetFrameType() == "StatusBar" and not healthBar:GetName() and healthBar:IsVisible() ) then
+        if( healthBar and not healthBar.SCTHooked and healthBar.GetObjectType and healthBar:GetObjectType () == "StatusBar" and not healthBar:GetName() and healthBar:IsVisible() ) then
             return healthBar;
         end
     end
