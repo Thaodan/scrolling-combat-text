@@ -12,10 +12,10 @@ SCT.LOCALS.NoCombat = "- БОЙ";					-- Message to be displayed when leaving co
 SCT.LOCALS.ComboPoint = "Комбо";			  		-- Message to be displayed when gaining a combo point
 SCT.LOCALS.FiveCPMessage = "Полная серия!"; -- Message to be displayed when you have 5 combo points
 SCT.LOCALS.ExtraAttack = "Экстра атака!"; -- Message to be displayed when time to execute
-SCT.LOCALS.KillingBlow = "Разящий удар!"; -- Message to be displayed when you kill something
+SCT.LOCALS.KillingBlow = "Решающий удар!"; -- Message to be displayed when you kill something
 SCT.LOCALS.Interrupted = "Прервано!"; -- Message to be displayed when you are interrupted
 SCT.LOCALS.Dispel = "Снято!"; -- Message to be displayed when you dispel
-SCT.LOCALS.DispelFailed = "Неудачный диспел!"; -- Message to be displayed when your dispel failed
+SCT.LOCALS.DispelFailed = "Неудачное рассеяние!"; -- Message to be displayed when your dispel failed
 SCT.LOCALS.Rampage = "Rampage"; -- Message to be displayed when rampage is needed
 
 --Option messages
@@ -26,7 +26,7 @@ SCT.LOCALS.Frame1_Tip = "Выводить это сообщение в обла�
 SCT.LOCALS.Frame2_Tip = "Выводить это сообщение в области ANIMATION FRAME 2";
 
 --Warnings
-SCT.LOCALS.Version_Warning= "|cff00ff00SCT WARNING|r\n\nВаши сохраненные настройки от старой версии аддона SCT. Если у вас возникают ошибки при работе аддона сбросьте настройки кнопкой 'Сброс' или командой /sctreset";
+SCT.LOCALS.Version_Warning= "|cff00ff00SCT ПРЕДУПРЕЖДЕНИЕ|r\n\nВаши сохраненные настройки от старой версии аддона SCT. Если у вас возникают ошибки при работе аддона сбросьте настройки кнопкой 'Сброс' или командой /sctreset";
 SCT.LOCALS.Load_Error = "|cff00ff00Ошибка загрузки настроек SCT. Аддон не доступен.|r Ошибка: ";
 
 --nouns
@@ -65,6 +65,6 @@ SCT.LOCALS.FONTS = {
 
 -- Cosmos button
 SCT.LOCALS.CB_NAME		= "Scrolling Combat Text".." "..SCT.Version;
-SCT.LOCALS.CB_SHORT_DESC	= "by Grayhoof (редакция и локализация на русский: Likos";
+SCT.LOCALS.CB_SHORT_DESC	= "by Grayhoof";
 SCT.LOCALS.CB_LONG_DESC		= "щелкните для вызова настроек SCT";
 SCT.LOCALS.CB_ICON		= "Interface\\Icons\\Spell_Shadow_EvilEye"; -- "Interface\\Icons\\Spell_Shadow_FarSight"
