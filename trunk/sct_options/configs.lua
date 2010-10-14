@@ -162,6 +162,7 @@ end
 -------------------------
 --Get the Grayhoof Config
 function SCT:GetGrayhoofConfig()
+  if (not SCT.FRAME3) then return SCT:GetGrayhoofConfigNoSCTD() end;
 	local default = {
 		["SHOWCOMBAT"] = 1,
 		["SPELLCOLOR"] = 1,
@@ -199,6 +200,48 @@ function SCT:GetGrayhoofConfig()
 				["YOFFSET"] = 210,
 				["XOFFSET"] = 0,
 			}, -- [3]
+			[SCT.MSG] = {
+				["MSGFONT"] = "SCT Emblem",
+			},
+		},
+	  ["FRAMES"] = {
+			["SHOWHEAL"] = SCT.FRAME1,
+			["SHOWHONOR"] = SCT.FRAME2,
+			["SHOWDEBUFF"] = SCT.FRAME2,
+			["SHOWREP"] = SCT.FRAME2,
+			["SHOWSELFHEAL"] = SCT.FRAME1,
+			["SHOWKILLBLOW"] = SCT.FRAME1,
+			["SHOWBUFF"] = SCT.FRAME2,
+		},
+  };
+	return default;
+end
+
+-------------------------
+--Get the Grayhoof Config
+function SCT:GetGrayhoofConfigNoSCTD()
+	local default = {
+		["SHOWCOMBAT"] = 1,
+		["SPELLCOLOR"] = 1,
+		[SCT.FRAMES_DATA_TABLE] = {
+		  [SCT.FRAME1] = {
+				["GAPDIST"] = 100,
+				["ANITYPE"] = 7,
+				["ANISIDETYPE"] = 2,
+				["FONT"] = "SCT Emblem",
+				["ALIGN"] = 4,
+				["ICONSIDE"] = 4,
+				["DIRECTION"] = 1,
+			},
+			[SCT.FRAME2] = {
+				["GAPDIST"] = 200,
+				["ANITYPE"] = 7,
+				["ICONSIDE"] = 4,
+				["FONT"] = "SCT Emblem",
+				["ALIGN"] = 4,
+				["YOFFSET"] = 0,
+				["ANISIDETYPE"] = 2,
+			},
 			[SCT.MSG] = {
 				["MSGFONT"] = "SCT Emblem",
 			},

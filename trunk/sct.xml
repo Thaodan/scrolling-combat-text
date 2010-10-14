@@ -14,7 +14,7 @@
 		</Anchors>
 		<Scripts>
 	      	<OnUpdate>
-	        		SCT:UpdateAnimation(arg1);
+	        		SCT:UpdateAnimation(self, elapsed);
 	      	</OnUpdate>
 		</Scripts>
 	</Frame>

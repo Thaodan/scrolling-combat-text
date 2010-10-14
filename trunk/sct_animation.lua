@@ -147,7 +147,7 @@ end
 
 ----------------------
 -- Upate animations that are being used
-function SCT:UpdateAnimation(elapsed)
+function SCT:UpdateAnimation(aniframe, elapsed)
 	local anyActive = false
 	local i, key, value
 	for i = 1, #self.ArrayAniData do

@@ -1,4 +1,4 @@
-## Interface: 30200
+## Interface: 40000
 ## Title: SCT Options
 ## Notes: Options menu for SCT (LoadOnDemand)
 ## Author: Grayhoof
