@@ -9,12 +9,12 @@
 		</HitRectInsets>
 		<Scripts>
 			<OnClick>
-				if ( this:GetChecked() ) then
+				if ( self:GetChecked() ) then
 					PlaySound("igMainMenuOptionCheckBoxOff");
 				else
 					PlaySound("igMainMenuOptionCheckBoxOn");
 				end
-				SCT:OptionsCheckButtonOnClick();
+				SCT:OptionsCheckButtonOnClick(self);
 			</OnClick>
 		</Scripts>
 	</CheckButton>
@@ -59,13 +59,13 @@
 		</Layers>
 		<Scripts>
 			<OnClick>
-				SCT:OpenColorPicker(this);
+				SCT:OpenColorPicker(self);
 			</OnClick>
 			<OnEnter>
-				getglobal(this:GetName().."_SwatchBg"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+				_G[self:GetName().."_SwatchBg"]:SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
 			</OnEnter>
 			<OnLeave>
-				getglobal(this:GetName().."_SwatchBg"):SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+				_G[self:GetName().."_SwatchBg"]:SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 			</OnLeave>
 		</Scripts>
 		<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
@@ -76,12 +76,12 @@
 		<Scripts>
 			<OnClick>
 				PlaySound("igMainMenuOptionCheckBoxOff");
-				SCT:OptionsRadioButtonOnClick(this:GetID(),this:GetParent():GetName());
+				SCT:OptionsRadioButtonOnClick(self, self:GetID(),self:GetParent():GetName());
 			</OnClick>
 			<OnEnter>
-				if ( this.tooltipText ) then
-					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
 				end
 			</OnEnter>
 			<OnLeave>
@@ -106,7 +106,7 @@
 				</Anchors>
 				<Scripts>
 					<OnValueChanged>
-						SCT:OptionsSliderOnValueChanged();
+						SCT:OptionsSliderOnValueChanged(self, value);
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
@@ -144,7 +144,7 @@
 				</Anchors>
 				<Scripts>
 					<OnValueChanged>
-						SCT:OptionsSliderOnValueChanged();
+						SCT:OptionsSliderOnValueChanged(self, value);
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
@@ -162,11 +162,11 @@
 				<FontString inherits="GameFontHighlightSmall"/>
 				<Scripts>
 					<OnEnterPressed>
-						SCT:OptionsEditBoxOnValueChanged(this)
-						this:ClearFocus()
+						SCT:OptionsEditBoxOnValueChanged(self)
+						self:ClearFocus()
 					</OnEnterPressed>
 					<OnEscapePressed>
-						this:ClearFocus()
+						self:ClearFocus()
 					</OnEscapePressed>
 				</Scripts>
 			</EditBox>
@@ -194,12 +194,12 @@
 		<Scripts>
 			<OnLoad>
 			  DropDownList1:SetClampedToScreen(true)
-				UIDropDownMenu_Initialize(this, function() SCT:DropDown_Initialize(this) end);
+				UIDropDownMenu_Initialize(self, function() SCT:DropDown_Initialize(self) end);
 			</OnLoad>
 			<OnEnter>
-				if ( this.tooltipText ) then
-					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
 				end
 			</OnEnter>
 			<OnLeave>
@@ -228,12 +228,12 @@
 		</Layers>
 		<Scripts>
 			<OnLoad>
-				UIDropDownMenu_Initialize(this, function() SCT:CustomDropDown_Initialize(this) end);
+				UIDropDownMenu_Initialize(self, function() SCT:CustomDropDown_Initialize(self) end);
 			</OnLoad>
 			<OnEnter>
-				if ( this.tooltipText ) then
-					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
 				end
 			</OnEnter>
 			<OnLeave>
@@ -278,13 +278,13 @@
 				</Layers>
 				<Scripts>
 					<OnClick>
-						SCT:OpenColorPicker(this:GetParent());
+						SCT:OpenColorPicker(self:GetParent());
 					</OnClick>
 					<OnEnter>
-						getglobal(this:GetName().."_SwatchBg"):SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
+						_G[self:GetName().."_SwatchBg"]:SetVertexColor(NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b);
 					</OnEnter>
 					<OnLeave>
-						getglobal(this:GetName().."_SwatchBg"):SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
+						_G[self:GetName().."_SwatchBg"]:SetVertexColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 					</OnLeave>
 				</Scripts>
 				<NormalTexture name="$parentNormalTexture" file="Interface\ChatFrame\ChatFrameColorSwatch"/>
@@ -300,7 +300,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this:SetID(SCT.FRAME1);
+						self:SetID(SCT.FRAME1);
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
@@ -314,7 +314,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this:SetID(SCT.FRAME2);
+						self:SetID(SCT.FRAME2);
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
@@ -328,7 +328,7 @@
 				</Anchors>
 				<Scripts>
 					<OnLoad>
-						this:SetID(SCT.MSG);
+						self:SetID(SCT.MSG);
 					</OnLoad>
 				</Scripts>
 			</CheckButton>
@@ -396,7 +396,7 @@
 		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
 		<Scripts>
 			<OnClick>
-				SCT:SaveList_OnClick();
+				SCT:SaveList_OnClick(self);
 			</OnClick>
 		</Scripts>
 	</Button>
@@ -406,7 +406,7 @@
 		<HighlightTexture file="Interface\QuestFrame\UI-QuestTitleHighlight" alphaMode="ADD"/>
 		<Scripts>
 			<OnClick>
-				SCT:CustomEventList_OnClick(this);
+				SCT:CustomEventList_OnClick(self);
 			</OnClick>
 		</Scripts>
 	</Button>
@@ -424,9 +424,9 @@
 				PlaySound("igMainMenuOptionCheckBoxOn");
 			</OnClick>
 			<OnEnter>
-				if ( this.tooltipText ) then
-					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
 				end
 			</OnEnter>
 			<OnLeave>
@@ -448,9 +448,9 @@
 				PlaySound("igMainMenuOptionCheckBoxOn");
 			</OnClick>
 			<OnEnter>
-				if ( this.tooltipText ) then
-					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+				if ( self.tooltipText ) then
+					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
 				end
 			</OnEnter>
 			<OnLeave>
@@ -497,9 +497,9 @@
     		</FontString>
     		<Scripts>
     			<OnEnter>
-    				if ( this.tooltipText ) then
-    					GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
-    					GameTooltip:SetText(this.tooltipText, nil, nil, nil, nil, 1);
+    				if ( self.tooltipText ) then
+    					GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+    					GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, 1);
     				end
     			</OnEnter>
     			<OnLeave>
@@ -826,7 +826,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								SCT:OptionFrameTabClick()
+								SCT:OptionFrameTabClick(self)
 								SCT:ChangeFrameTab(SCT.FRAME1);
 								SCTOptions_TextFrame:Show();
 							</OnClick>
@@ -847,7 +847,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								SCT:OptionFrameTabClick()
+								SCT:OptionFrameTabClick(self)
 								SCT:ChangeFrameTab(SCT.FRAME2);
 								SCTOptions_TextFrame:Show();
 							</OnClick>
@@ -868,7 +868,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								SCT:OptionFrameTabClick()
+								SCT:OptionFrameTabClick(self)
 							</OnClick>
 						</Scripts>
 					</Button>
@@ -921,7 +921,7 @@
 				<Scripts>
 					<OnShow>
 						SCTOptionsFrame_Misc14:Click()
-						SCT:ShowExample()
+						SCT:ShowExample(self)
 						SCT_EXAMPLETEXT:Show()
 					</OnShow>
 				</Scripts>
@@ -1078,8 +1078,8 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								this:SetBackdropColor(.06,.06,.06,.8);
-								this:SetBackdropBorderColor(.2,.2,.2,.8);
+								self:SetBackdropColor(.06,.06,.06,.8);
+								self:SetBackdropBorderColor(.2,.2,.2,.8);
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -1222,14 +1222,14 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 									SCT:EnableNameplate();
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 									SCT:DisableNameplate();
 								end
-								SCT:OptionsCheckButtonOnClick();
+								SCT:OptionsCheckButtonOnClick(self);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -1396,13 +1396,13 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								if ( this:GetChecked() ) then
+								if ( self:GetChecked() ) then
 									PlaySound("igMainMenuOptionCheckBoxOff");
 								else
 									PlaySound("igMainMenuOptionCheckBoxOn");
 								end
-								SCT:OptionsCheckButtonOnClick();
-								SCT:ChangeStickyMode(this:GetChecked());
+								SCT:OptionsCheckButtonOnClick(self);
+								SCT:ChangeStickyMode(self:GetChecked());
 							</OnClick>
 						</Scripts>
 					</CheckButton>

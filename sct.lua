@@ -144,6 +144,7 @@ local POWER_STRINGS = {
   [SPELL_POWER_HAPPINESS] = HAPPINESS,
   [SPELL_POWER_RUNES] = RUNES,
   [SPELL_POWER_RUNIC_POWER] = RUNIC_POWER,
+  [SPELL_POWER_HOLY_POWER] = HOLY_POWER,
 }
 
 local SHADOW_STRINGS = {
@@ -545,7 +546,7 @@ function SCT:ParseCombat(arg1, timestamp, event, sourceGUID, sourceName, sourceF
       spellId, spellName, spellSchool, missType = select(1, ...)
       texture = select(3, GetSpellInfo(spellId))
     end
-    text = getglobal(missType)
+    text = _G[missType]
 
     if toPlayer then
       if (missType == "REFLECT") then

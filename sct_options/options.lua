@@ -3,6 +3,7 @@
 --But this is for an option page that is only loaded some of the time, so if
 --its not broken, I'm not worrying about fixing it! =)
 
+local _G = _G
 local tinsert = function(t,v)
   t[#t+1] = v
 end
@@ -38,14 +39,14 @@ end
 ----------------------
 --Called when option page loads
 function SCT:OptionsFrame_OnShow()
-  local option1, option2, option3, option4, option5, string, getvalue
+  local option1, option2, option3, option4, option5, label, getvalue
   --Misc Options
   for key, value in pairs(SCT.OPTIONS.FrameMisc) do
-    string = getglobal("SCTOptionsFrame_Misc"..value.index)
-    if (string) then
-      string:SetText(key)
+    label = _G["SCTOptionsFrame_Misc"..value.index]
+    if (label) then
+      label:SetText(key)
       if (value.tooltipText) then
-        string.tooltipText = value.tooltipText
+        label.tooltipText = value.tooltipText
       end
     end
   end
@@ -53,18 +54,18 @@ function SCT:OptionsFrame_OnShow()
   local frame, swatch, sColor
   -- Set Options values
   for key, value in pairs(SCT.OPTIONS.FrameEventFrames) do
-    option1 = getglobal("SCTOptionsFrame"..value.index.."_CheckButton")
-    option2 = getglobal("SCTOptionsFrame"..value.index.."_CritCheckButton")
-    option3 = getglobal("SCTOptionsFrame"..value.index.."_RadioMsgButton")
-    option4 = getglobal("SCTOptionsFrame"..value.index.."_RadioFrame1Button")
-    option5 = getglobal("SCTOptionsFrame"..value.index.."_RadioFrame2Button")
-    string = getglobal("SCTOptionsFrame"..value.index.."_CheckButtonText")
+    option1 = _G["SCTOptionsFrame"..value.index.."_CheckButton"]
+    option2 = _G["SCTOptionsFrame"..value.index.."_CritCheckButton"]
+    option3 = _G["SCTOptionsFrame"..value.index.."_RadioMsgButton"]
+    option4 = _G["SCTOptionsFrame"..value.index.."_RadioFrame1Button"]
+    option5 = _G["SCTOptionsFrame"..value.index.."_RadioFrame2Button"]
+    label = _G["SCTOptionsFrame"..value.index.."_CheckButtonText"]
 
     --main check
     option1.SCTVar = value.SCTVar
     option1:SetChecked(self.db.profile[value.SCTVar])
     option1.tooltipText = value.tooltipText
-    string:SetText(key)
+    label:SetText(key)
 
     --crit check
     option2.SCTVar = value.SCTVar
@@ -75,15 +76,15 @@ function SCT:OptionsFrame_OnShow()
     option3.tooltipText = SCT.LOCALS.Option_Msg_Tip
     option4.tooltipText = SCT.LOCALS.Frame1_Tip
     option5.tooltipText = SCT.LOCALS.Frame2_Tip
-    self:OptionsRadioButtonOnClick(self.db.profile[self.FRAMES_TABLE][value.SCTVar],"SCTOptionsFrame"..value.index)
+    self:OptionsRadioButtonOnClick(self,self.db.profile[self.FRAMES_TABLE][value.SCTVar],"SCTOptionsFrame"..value.index)
     --set vars after setting up radios, so no redundant saving.
     option3.SCTVar = value.SCTVar
     option4.SCTVar = value.SCTVar
     option5.SCTVar = value.SCTVar
 
     --Color Swatch
-    frame = getglobal("SCTOptionsFrame"..value.index)
-    swatch = getglobal("SCTOptionsFrame"..value.index.."_ColorSwatchNormalTexture")
+    frame = _G["SCTOptionsFrame"..value.index]
+    swatch = _G["SCTOptionsFrame"..value.index.."_ColorSwatchNormalTexture"]
     sColor = self.db.profile[self.COLORS_TABLE][value.SCTVar]
     frame.r = sColor.r
     frame.g = sColor.g
@@ -99,9 +100,9 @@ function SCT:OptionsFrame_OnShow()
 
   -- Set CheckButton states
   for key, value in pairs(SCT.OPTIONS.FrameCheckButtons) do
-    option1 = getglobal("SCTOptionsFrame_CheckButton"..value.index)
-    string = getglobal("SCTOptionsFrame_CheckButton"..value.index.."Text")
-    if option1 and string then
+    option1 = _G["SCTOptionsFrame_CheckButton"..value.index]
+    text = _G["SCTOptionsFrame_CheckButton"..value.index.."Text"]
+    if option1 and text then
       option1.SCTVar = value.SCTVar
       option1.SCTTable = value.SCTTable
       if (option1.SCTTable) then
@@ -110,17 +111,17 @@ function SCT:OptionsFrame_OnShow()
         option1:SetChecked(self.db.profile[value.SCTVar])
       end
       option1.tooltipText = value.tooltipText
-      string:SetText(key)
+      text:SetText(key)
     end
   end
 
   --Set Sliders
   for key, value in pairs(SCT.OPTIONS.FrameSliders) do
-    option1 = getglobal("SCTOptionsFrame_Slider"..value.index.."Slider")
-    string = getglobal("SCTOptionsFrame_Slider"..value.index.."SliderText")
-    option2 = getglobal("SCTOptionsFrame_Slider"..value.index.."SliderLow")
-    option3 = getglobal("SCTOptionsFrame_Slider"..value.index.."SliderHigh")
-    option4 = getglobal("SCTOptionsFrame_Slider"..value.index.."EditBox")
+    option1 = _G["SCTOptionsFrame_Slider"..value.index.."Slider"]
+    text = _G["SCTOptionsFrame_Slider"..value.index.."SliderText"]
+    option2 = _G["SCTOptionsFrame_Slider"..value.index.."SliderLow"]
+    option3 = _G["SCTOptionsFrame_Slider"..value.index.."SliderHigh"]
+    option4 = _G["SCTOptionsFrame_Slider"..value.index.."EditBox"]
     option1.SCTVar = value.SCTVar
     option1.SCTTable = value.SCTTable
     if (option1.SCTTable) then
@@ -131,10 +132,10 @@ function SCT:OptionsFrame_OnShow()
     option1.SCTLabel = key
     option1:SetScript("OnValueChanged", nil)
     option1:SetMinMaxValues(value.minValue, value.maxValue)
-    option1:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged() end)
+    option1:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged(_G["SCTOptionsFrame_Slider"..value.index.."Slider"]) end)
     option1:SetValueStep(value.valueStep)
     option1.tooltipText = value.tooltipText
-    string:SetText(key)
+    text:SetText(key)
     option4:SetText(getvalue)
     option2:SetText(value.minText)
     option3:SetText(value.maxText)
@@ -148,8 +149,8 @@ function SCT:OptionsFrame_OnShow()
 
   --Dropdowns
   for key, value in pairs(SCT.OPTIONS.FrameSelections) do
-    option1 = getglobal("SCTOptionsFrame_Selection"..value.index)
-    option2 = getglobal("SCTOptionsFrame_Selection"..value.index.."Label")
+    option1 = _G["SCTOptionsFrame_Selection"..value.index]
+    option2 = _G["SCTOptionsFrame_Selection"..value.index.."Label"]
     option1.SCTVar = value.SCTVar
     option1.SCTTable = value.SCTTable
     option1.SCTValueSave = value.SCTValueSave
@@ -175,8 +176,8 @@ function SCT:OptionsFrame_OnShow()
 
   --Custom Dropdowns
   for key, value in pairs(SCT.OPTIONS.FrameCustomSelections) do
-    option1 = getglobal("SCTOptionsFrame_CustomSelection"..value.index)
-    option2 = getglobal("SCTOptionsFrame_CustomSelection"..value.index.."Label")
+    option1 = _G["SCTOptionsFrame_CustomSelection"..value.index]
+    option2 = _G["SCTOptionsFrame_CustomSelection"..value.index.."Label"]
     --lookup table cause of WoW's crappy dropdown UI.
     option1.lookup = value.table
     option1.tooltipText = value.tooltipText
@@ -185,9 +186,9 @@ function SCT:OptionsFrame_OnShow()
 
   --Colors
   for key, value in pairs(SCT.OPTIONS.FrameColors) do
-    frame = getglobal("SCTOptionsFrame_Color"..value.index)
-    string = getglobal("SCTOptionsFrame_Color"..value.index.."_Label")
-    swatch = getglobal("SCTOptionsFrame_Color"..value.index.."NormalTexture")
+    frame = _G["SCTOptionsFrame_Color"..value.index]
+    label = _G["SCTOptionsFrame_Color"..value.index.."_Label"]
+    swatch = _G["SCTOptionsFrame_Color"..value.index.."NormalTexture"]
     sColor = self.db.profile[self.SPELL_COLORS_TABLE][value.SCTVar]
     if sColor then
       frame.r = sColor.r
@@ -201,15 +202,15 @@ function SCT:OptionsFrame_OnShow()
     local t = self.SPELL_COLORS_TABLE
     frame.swatchFunc = function() self:OptionsFrame_SetColor(f, s, k, t) end
     frame.cancelFunc = function(x) self:OptionsFrame_CancelColor(f, s, k, t, x) end
-    string:SetText(key)
+    label:SetText(key)
   end
 
   --Edit Boxes
   for key, value in pairs(SCT.OPTIONS.EditBoxes) do
-    frame = getglobal("SCTOptionsFrame_EditBox"..value.index.."_EditBox")
-    string = getglobal("SCTOptionsFrame_EditBox"..value.index.."_Label")
+    frame = _G["SCTOptionsFrame_EditBox"..value.index.."_EditBox"]
+    label = _G["SCTOptionsFrame_EditBox"..value.index.."_Label"]
     if (frame) then
-      string:SetText(key)
+      label:SetText(key)
       if (value.tooltipText) then
         frame.tooltipText = value.tooltipText
       end
@@ -239,8 +240,8 @@ end
 function SCT:OptionsFrame_SetColor(f,s,k,t)
   local r,g,b = ColorPickerFrame:GetColorRGB()
   local color={}
-  local swatch = getglobal(s)
-  local frame = getglobal(f)
+  local swatch = _G[s]
+  local frame = _G[f]
   swatch:SetVertexColor(r,g,b)
   frame.r, frame.g, frame.b = r,g,b
   color.r, color.g, color.b = r,g,b
@@ -255,8 +256,8 @@ end
 function SCT:OptionsFrame_CancelColor(f,s,k,t,prev)
   local r,g,b = prev.r, prev.g, prev.b
   local color={}
-  local swatch = getglobal(s)
-  local frame = getglobal(f)
+  local swatch = _G[s]
+  local frame = _G[f]
   swatch:SetVertexColor(r, g, b)
   frame.r, frame.g, frame.b = r,g,b
   color.r, color.g, color.b = r,g,b
@@ -268,25 +269,25 @@ end
 
 ----------------------
 --Sets the silder values in the config
-function SCT:OptionsSliderOnValueChanged()
-  local string, editbox
-  string = getglobal(this:GetName().."Text")
-  editbox = getglobal(this:GetParent():GetName().."EditBox")
-  string:SetText(this.SCTLabel)
-  editbox:SetText(this:GetValue())
-  if (this.SCTTable) then
-    self.db.profile[SCT.FRAMES_DATA_TABLE][this.SCTTable][this.SCTVar] = this:GetValue()
-  elseif this.SCTVar then
-    self.db.profile[this.SCTVar] = this:GetValue()
+function SCT:OptionsSliderOnValueChanged(slider, value)
+  local text, editbox
+  text = _G[slider:GetName().."Text"]
+  editbox = _G[slider:GetParent():GetName().."EditBox"]
+  text:SetText(slider.SCTLabel)
+  editbox:SetText(slider:GetValue())
+  if (slider.SCTTable) then
+    self.db.profile[SCT.FRAMES_DATA_TABLE][slider.SCTTable][slider.SCTVar] = slider:GetValue()
+  elseif slider.SCTVar then
+    self.db.profile[slider.SCTVar] = slider:GetValue()
   end
   --update Example
-  self:ShowExample()
+  self:ShowExample(slider)
 end
 
 ----------------------
 --Sets the silder values in the config
 function SCT:OptionsEditBoxOnValueChanged(obj)
-  local slider = getglobal(obj:GetParent():GetName().."Slider")
+  local slider = _G[obj:GetParent():GetName().."Slider"]
   local getvalue = tonumber(obj:GetText())
   if (slider.SCTTable) then
     self.db.profile[SCT.FRAMES_DATA_TABLE][slider.SCTTable][slider.SCTVar] = getvalue
@@ -296,33 +297,33 @@ function SCT:OptionsEditBoxOnValueChanged(obj)
   -- disable update change,set slider,setonchance back
   slider:SetScript("OnValueChanged", nil)
   slider:SetValue(getvalue)
-  slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged() end)
+  slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged(slider) end)
   --update Example
-  self:ShowExample()
+  self:ShowExample(obj)
 end
 
 ----------------------
 --Sets the checkbox values in the config
-function SCT:OptionsCheckButtonOnClick()
-  if (string.find(this:GetName(), "_CritCheckButton")) then
-    self.db.profile[self.CRITS_TABLE][this.SCTVar] = this:GetChecked() or false
+function SCT:OptionsCheckButtonOnClick(chk)
+  if (string.find(chk:GetName(), "_CritCheckButton")) then
+    self.db.profile[self.CRITS_TABLE][chk.SCTVar] = chk:GetChecked() or false
   else
-    if (this.SCTTable) then
-      self.db.profile[SCT.FRAMES_DATA_TABLE][this.SCTTable][this.SCTVar] = this:GetChecked() or false
-    elseif this.SCTVar then
-      self.db.profile[this.SCTVar] = this:GetChecked() or false
+    if (chk.SCTTable) then
+      self.db.profile[SCT.FRAMES_DATA_TABLE][chk.SCTTable][chk.SCTVar] = chk:GetChecked() or false
+    elseif chk.SCTVar then
+      self.db.profile[chk.SCTVar] = chk:GetChecked() or false
     end
   end
   --update Example
-  self:ShowExample()
+  self:ShowExample(chk)
 end
 
 ----------------------
 --Sets the checkbox values in the config
-function SCT:OptionsRadioButtonOnClick(id,parent)
-  local frame1 = getglobal(parent.."_RadioFrame1Button")
-  local frame2 = getglobal(parent.."_RadioFrame2Button")
-  local msg = getglobal(parent.."_RadioMsgButton")
+function SCT:OptionsRadioButtonOnClick(radio,id,parent)
+  local frame1 = _G[parent.."_RadioFrame1Button"]
+  local frame2 = _G[parent.."_RadioFrame2Button"]
+  local msg = _G[parent.."_RadioMsgButton"]
   --set radio button options based on what was clicked.
   if (id==SCT.FRAME1) then
     frame1:SetButtonState("NORMAL", true)
@@ -347,24 +348,24 @@ function SCT:OptionsRadioButtonOnClick(id,parent)
     frame2:SetButtonState("NORMAL", false)
   end
   --if it has a var, save it (some don't)
-  if (this.SCTVar) then
-    self.db.profile[self.FRAMES_TABLE][this.SCTVar] = id
+  if (radio.SCTVar) then
+    self.db.profile[self.FRAMES_TABLE][radio.SCTVar] = id
   end
   --update Example
-  self:ShowExample()
+  self:ShowExample(radio)
 end
 
 ---------------------
 --Init a Dropdown
-function SCT:DropDown_Initialize()
+function SCT:DropDown_Initialize(ddl)
   local info, index, value, key
   for index, value in pairs(SCT.OPTIONS.FrameSelections) do
-    if (this:GetName() == "SCTOptionsFrame_Selection"..value.index.."Button") then
+    if (ddl:GetName() == "SCTOptionsFrame_Selection"..value.index) then
       for key=1, #value.table do
         info = UIDropDownMenu_CreateInfo()
         info.text = value.table[key]
         info.func = SCT.DropDown_OnClick
-        info.arg1 = this:GetParent()
+        info.arg1 = ddl
         UIDropDownMenu_AddButton(info)
       end
       break
@@ -375,33 +376,33 @@ end
 ---------------------
 -- Dropdown Onclick
 function SCT:DropDown_OnClick(ddl)
-  local save = this:GetID()
-  UIDropDownMenu_SetSelectedID(ddl, this:GetID())
-  if (ddl.SCTValueSave) then save = this:GetText() end
+  local save = self:GetID()
+  UIDropDownMenu_SetSelectedID(ddl, self:GetID())
+  if (ddl.SCTValueSave) then save = self:GetText() end
   if (ddl.SCTTable) then
     SCT.db.profile[SCT.FRAMES_DATA_TABLE][ddl.SCTTable][ddl.SCTVar] = save
   else
     SCT.db.profile[ddl.SCTVar] = save
   end
   --update Example
-  SCT:ShowExample()
+  SCT:ShowExample(ddl)
 end
 
 ----------------------
 --Open the color selector using show/hide
-function SCT:SaveList_OnClick()
-  local text = getglobal(this:GetName().."_Name"):GetText()
+function SCT:SaveList_OnClick(item)
+  local text = _G[item:GetName().."_Name"]:GetText()
   if (text ~= nil) then
-    getglobal("SCTOptionsProfileEditBox_EditBox"):SetText(text)
+    _G["SCTOptionsProfileEditBox_EditBox"]:SetText(text)
   end
 end
 
 ----------------------
 --Open the color selector using show/hide
-function SCT:ProfileList_OnClick()
-  local text = getglobal(this:GetName().."_Name"):GetText()
+function SCT:ProfileList_OnClick(item)
+  local text = _G[item:GetName().."_Name"]:GetText()
   if (text ~= nil) then
-    getglobal("SCTOptionsProfileEditBox"):SetText(text)
+    _G["SCTOptionsProfileEditBox"]:SetText(text)
   end
 end
 
@@ -418,7 +419,7 @@ end
 -----------------------
 --Load a profile
 function SCT:LoadProfile()
-  local editbox = getglobal("SCTOptionsProfileEditBox_EditBox")
+  local editbox = _G["SCTOptionsProfileEditBox_EditBox"]
   local profile = editbox:GetText()
   if (profile ~= "" and profile ~= self.db:GetCurrentProfile()) then
     self.db:CopyProfile(profile)
@@ -432,7 +433,7 @@ end
 -----------------------
 --Delete a profile
 function SCT:DeleteProfile()
-  local editbox = getglobal("SCTOptionsProfileEditBox_EditBox")
+  local editbox = _G["SCTOptionsProfileEditBox_EditBox"]
   local profile = editbox:GetText()
 
   if (profile ~= "") then
@@ -452,7 +453,7 @@ end
 function SCT:OpenColorPicker(button)
   CloseMenus()
   if ( not button ) then
-    button = this
+    button = self
   end
   ColorPickerFrame.func = button.swatchFunc
   ColorPickerFrame:SetColorRGB(button.r, button.g, button.b)
@@ -465,15 +466,15 @@ end
 -- display ddl or chxbox based on type
 function SCT:UpdateAnimationOptions()
   --get scroll down checkbox
-  local chkbox = getglobal("SCTOptionsFrame_CheckButton4")
+  local chkbox = _G["SCTOptionsFrame_CheckButton4"]
   --get anime type dropdown
-  local ddl1 = getglobal("SCTOptionsFrame_Selection1")
+  local ddl1 = _G["SCTOptionsFrame_Selection1"]
   --get animside type dropdown
-  local ddl2 = getglobal("SCTOptionsFrame_Selection2")
+  local ddl2 = _G["SCTOptionsFrame_Selection2"]
   --get gap distance silder
-  local slide = getglobal("SCTOptionsFrame_Slider15")
+  local slide = _G["SCTOptionsFrame_Slider15"]
   --get subframe
-  local subframe = getglobal("SCTAnimationSubFrame")
+  local subframe = _G["SCTAnimationSubFrame"]
   --get item
   local id = UIDropDownMenu_GetSelectedID(ddl1)
   chkbox:ClearAllPoints()
@@ -516,7 +517,7 @@ function SCT:ScrollBar_Update()
   FauxScrollFrame_Update(SCTScrollBar, size, 10, 20)
   --loop thru each display item
   for i=1,10 do
-    item = getglobal("SCTList"..i.."_Name")
+    item = _G["SCTList"..i.."_Name"]
     idx = offset+i
     if idx<=size then
       key, value = next(profiles)
@@ -533,8 +534,8 @@ end
 
 ----------------------
 --change frame tabs
-function SCT:OptionFrameTabClick()
-  self:ToggleFrameTab(this:GetName(),self.OptionFrameFrames[this:GetName()].frame)
+function SCT:OptionFrameTabClick(tab)
+  self:ToggleFrameTab(tab:GetName(),self.OptionFrameFrames[tab:GetName()].frame)
   PlaySound("igCharacterInfoTab")
 end
 
@@ -544,13 +545,13 @@ function SCT:ToggleFrameTab(tab, frameName)
   local key, value
   for key, value in pairs(self.OptionFrameFrames) do
     if ( key == tab and value.frame == frameName ) then
-      getglobal(value.frame):Show()
-      getglobal(value.example):SetTextColor(1, 1, 0)
-      getglobal(key):LockHighlight()
+      _G[value.frame]:Show()
+      _G[value.example]:SetTextColor(1, 1, 0)
+      _G[key]:LockHighlight()
     else
-      getglobal(value.frame):Hide()
-      getglobal(value.example):SetTextColor(1, 1, 1)
-      getglobal(key):UnlockHighlight()
+      _G[value.frame]:Hide()
+      _G[value.example]:SetTextColor(1, 1, 1)
+      _G[key]:UnlockHighlight()
     end
   end
 end
@@ -587,19 +588,19 @@ function SCT:ChangeFrameTab(frame)
   SCTOptionsFrame_Slider7EditBox:SetText(tab[SCTOptionsFrame_Slider7Slider.SCTVar])
   SCTOptionsFrame_Slider7Slider:SetScript("OnValueChanged", nil)
   SCTOptionsFrame_Slider7Slider:SetValue(tab[SCTOptionsFrame_Slider7Slider.SCTVar])
-  SCTOptionsFrame_Slider7Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged() end)
+  SCTOptionsFrame_Slider7Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged(SCTOptionsFrame_Slider7Slider) end)
   --y slider
   SCTOptionsFrame_Slider8SliderText:SetText(SCTOptionsFrame_Slider8Slider.SCTLabel)
   SCTOptionsFrame_Slider8EditBox:SetText(tab[SCTOptionsFrame_Slider8Slider.SCTVar])
   SCTOptionsFrame_Slider8Slider:SetScript("OnValueChanged", nil)
   SCTOptionsFrame_Slider8Slider:SetValue(tab[SCTOptionsFrame_Slider8Slider.SCTVar])
-  SCTOptionsFrame_Slider8Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged() end)
+  SCTOptionsFrame_Slider8Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged(SCTOptionsFrame_Slider8Slider) end)
   --gap slider
   SCTOptionsFrame_Slider15SliderText:SetText(SCTOptionsFrame_Slider15Slider.SCTLabel)
   SCTOptionsFrame_Slider15EditBox:SetText(tab[SCTOptionsFrame_Slider15Slider.SCTVar])
   SCTOptionsFrame_Slider15Slider:SetScript("OnValueChanged", nil)
   SCTOptionsFrame_Slider15Slider:SetValue(tab[SCTOptionsFrame_Slider15Slider.SCTVar])
-  SCTOptionsFrame_Slider15Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged() end)
+  SCTOptionsFrame_Slider15Slider:SetScript("OnValueChanged", function() SCT:OptionsSliderOnValueChanged(SCTOptionsFrame_Slider15Slider) end)
   --Selection
   UIDropDownMenu_SetSelectedID(SCTOptionsFrame_Selection1, tab[SCTOptionsFrame_Selection1.SCTVar])
   UIDropDownMenu_SetText(SCTOptionsFrame_Selection1, SCTOptionsFrame_Selection1.lookup[tab[SCTOptionsFrame_Selection1.SCTVar]])
@@ -629,19 +630,19 @@ end
 
 ---------------------
 --Show SCT Example
-function SCT:ShowExample()
+function SCT:ShowExample(item)
   local example
   SCT:AniInit()
 
   --animated example for options that may need it
-  local option = this.SCTVar
+  local option = item.SCTVar
   if (option) and (string.find(option,"SHOW") == 1) then
     SCT:Display_Event(option, SCT.LOCALS.EXAMPLE)
   end
 
   --show example FRAME1
   --get object
-  example = getglobal("SCTaniExampleData1")
+  example = _G["SCTaniExampleData1"]
   --set text size
   SCT:SetFontSize(example,
                   SCT.db.profile[SCT.FRAMES_DATA_TABLE][SCT.FRAME1]["FONT"],
@@ -660,7 +661,7 @@ function SCT:ShowExample()
 
   --show example FRAME2
   --get object
-  example = getglobal("SCTaniExampleData2")
+  example = _G["SCTaniExampleData2"]
   --set text size
   SCT:SetFontSize(example,
                   SCT.db.profile[SCT.FRAMES_DATA_TABLE][SCT.FRAME2]["FONT"],
@@ -677,7 +678,7 @@ function SCT:ShowExample()
   example:SetText(SCT.LOCALS.EXAMPLE2)
 
   --get object
-  example = getglobal("SCTMsgExample1")
+  example = _G["SCTMsgExample1"]
   --set text size
   SCT:SetMsgFont(example)
   --set alpha
@@ -764,8 +765,8 @@ function SCT:CustomEventsScrollBar_Update()
   FauxScrollFrame_Update(SCTCustomEventsScrollBar, size, 10, 20)
   --loop thru each display item
   for i=1,10 do
-    item = getglobal("SCTCustomEventList"..i.."_Name")
-    frame = getglobal("SCTCustomEventList"..i)
+    item = _G["SCTCustomEventList"..i.."_Name"]
+    frame = _G["SCTCustomEventList"..i]
     idx = offset+i
     if idx<=size then
       k,key = next(sort_table)
@@ -1087,15 +1088,15 @@ end
 
 ---------------------
 --Init a Custom Dropdown
-function SCT:CustomDropDown_Initialize()
+function SCT:CustomDropDown_Initialize(ddl)
   local info, index, value, key
   for index, value in pairs(SCT.OPTIONS.FrameCustomSelections) do
-    if (this:GetName() == "SCTOptionsFrame_CustomSelection"..value.index.."Button") then
+    if (ddl:GetName() == "SCTOptionsFrame_CustomSelection"..value.index) then
       for k, v in self:PairsByKeys(value.table) do
         info = UIDropDownMenu_CreateInfo()
         info.text = v
         info.func = SCT.CustomDropDown_OnClick
-        info.arg1 = this:GetParent()
+        info.arg1 = ddl
         info.value = k
         UIDropDownMenu_AddButton(info)
       end
@@ -1107,8 +1108,8 @@ end
 ---------------------
 -- Custom Dropdown Onclick
 function SCT:CustomDropDown_OnClick(ddl)
-  UIDropDownMenu_SetSelectedValue(ddl, this.value)
+  UIDropDownMenu_SetSelectedValue(ddl, self.value)
   if ddl == SCTOptionsFrame_CustomSelection1 then
-    SCT:CustomEventSetType(this.value, SCTOptions_CustomEventsDetailsFrame.current)
+    SCT:CustomEventSetType(self.value, SCTOptions_CustomEventsDetailsFrame.current)
   end
 end
