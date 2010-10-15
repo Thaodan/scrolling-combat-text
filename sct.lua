@@ -144,6 +144,8 @@ local POWER_STRINGS = {
   [SPELL_POWER_HAPPINESS] = HAPPINESS,
   [SPELL_POWER_RUNES] = RUNES,
   [SPELL_POWER_RUNIC_POWER] = RUNIC_POWER,
+  [SPELL_POWER_SOUL_SHARDS] = SHARDS,
+  [SPELL_POWER_ECLIPSE] = ECLIPSE,
   [SPELL_POWER_HOLY_POWER] = HOLY_POWER,
 }
 
@@ -358,7 +360,7 @@ end
 
 ----------------------
 --Player Mana
-function SCT:UnitPower(event, larg1)
+function SCT:UNIT_POWER(event, larg1)
   if (larg1 == "player") and (UnitPowerType("player") == 0)then
     local warnlevel = db["LOWMANA"] / 100
     local ManaPercent = UnitMana("player") / UnitManaMax("player")
@@ -1002,9 +1004,7 @@ function SCT:RegisterSelfEvents()
 
   -- Register Main Events
   self:RegisterEvent("UNIT_HEALTH")
-  self:RegisterEvent("UNIT_MANA", "UnitPower")
-  self:RegisterEvent("UNIT_ENERGY", "UnitPower")
-  self:RegisterEvent("UNIT_RAGE", "UnitPower")
+  self:RegisterEvent("UNIT_POWER")
   self:RegisterEvent("UNIT_DISPLAYPOWER")
   self:RegisterEvent("RUNE_POWER_UPDATE");
   self:RegisterEvent("PLAYER_REGEN_ENABLED")
