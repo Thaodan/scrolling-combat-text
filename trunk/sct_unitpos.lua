@@ -19,7 +19,7 @@ end
 ----------------------
 --Check frame to see if a nameplate we can use
 local function CheckFrame(object)
-	local name = select( 7, object:GetParent():GetRegions() ):GetText();
+	local name = select( 4, object:GetParent():GetRegions() ):GetText();
 	if (not SCT.UnitPlates[name]) and (object:IsVisible()) then
 		SCT.UnitPlates[name] = object;
 	end
@@ -71,7 +71,7 @@ end
 ----------------------
 --When a new health bar is hidden, remove the name and run any hooks
 function SCT:OnHide(object)
-	local name = select( 7, object:GetParent():GetRegions() ):GetText();
+	local name = select( 4, object:GetParent():GetRegions() ):GetText();
 	SCT.UnitPlates[name] = nil;
 end
 
