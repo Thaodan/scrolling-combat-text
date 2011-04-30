@@ -141,7 +141,7 @@ local POWER_STRINGS = {
   [SPELL_POWER_RAGE] = RAGE,
   [SPELL_POWER_FOCUS] = FOCUS,
   [SPELL_POWER_ENERGY] = ENERGY,
-  [SPELL_POWER_HAPPINESS] = HAPPINESS,
+  --[SPELL_POWER_HAPPINESS] = HAPPINESS,
   [SPELL_POWER_RUNES] = RUNES,
   [SPELL_POWER_RUNIC_POWER] = RUNIC_POWER,
   [SPELL_POWER_SOUL_SHARDS] = SHARDS,
@@ -435,7 +435,7 @@ end
 
 ----------------------
 -- Displays Parsed info based on type
-function SCT:ParseCombat(arg1, timestamp, event, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
+function SCT:ParseCombat(arg1, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
   local etype = COMBAT_EVENTS[event]
   if not etype then return end
 
