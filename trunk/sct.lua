@@ -435,7 +435,7 @@ end
 
 ----------------------
 -- Displays Parsed info based on type
-function SCT:ParseCombat(arg1, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
+function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, ...)
   local etype = COMBAT_EVENTS[event]
   if not etype then return end
 
