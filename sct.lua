@@ -65,6 +65,14 @@ local string_match = string.match
 local string_format = string.format
 local string_find = string.find
 local string_split = string.split
+local function string_nil(val)
+  if val then
+    return val
+  else
+    return UNKNOWN
+  end
+end
+
 
 --combat log locals
 local CombatLog_Object_IsA = CombatLog_Object_IsA
@@ -74,8 +82,8 @@ local COMBATLOG_OBJECT_NONE = COMBATLOG_OBJECT_NONE
 local COMBATLOG_FILTER_MINE = COMBATLOG_FILTER_MINE
 local COMBATLOG_FILTER_MY_PET = COMBATLOG_FILTER_MY_PET
 local COMBATLOG_FILTER_HOSTILE = bit.bor(
-						COMBATLOG_FILTER_HOSTILE_PLAYERS,
-						COMBATLOG_FILTER_HOSTILE_UNITS)
+            COMBATLOG_FILTER_HOSTILE_PLAYERS,
+            COMBATLOG_FILTER_HOSTILE_UNITS)
 local COMBATLOG_FILTER_PLAYER = bit.bor(
             COMBATLOG_OBJECT_AFFILIATION_MASK,
             COMBATLOG_OBJECT_REACTION_MASK,
@@ -375,7 +383,7 @@ function SCT:UNIT_POWER(event, larg1)
   if (larg1 == "player") and (db["SHOWALLPOWER"]) then
     local ManaFull = UnitMana("player")
     if (ManaFull > last_mana_full) then
-      self:Display_Event("SHOWPOWER", string_format("+%d %s", ManaFull-last_mana_full, POWER_STRINGS[UnitPowerType("player")]))
+      self:Display_Event("SHOWPOWER", string_format("+%d %s", ManaFull-last_mana_full, string_nil(POWER_STRINGS[UnitPowerType("player")])))
     end
     last_mana_full = ManaFull
   end
@@ -565,14 +573,14 @@ function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, source
     spellId, spellName, spellSchool, amount, powerType, extraAmount = select(1, ...)
     texture = select(3, GetSpellInfo(spellId))
     if toPlayer then
-      self:Display_Event("SHOWPOWER", string_format("-%d %s", amount, POWER_STRINGS[powerType]), nil, nil, nil, nil, nil, nil, spellName, texture)
+      self:Display_Event("SHOWPOWER", string_format("-%d %s", amount, string_nil(POWER_STRINGS[powerType])), nil, nil, nil, nil, nil, nil, spellName, texture)
     elseif fromPlayer and extraAmount and (not db["SHOWALLPOWER"]) then
       if (extraAmount < db["MANAFILTER"]) then return end
-      self:Display_Event("SHOWPOWER", string_format("+%d %s", extraAmount, POWER_STRINGS[powerType]), nil, nil, nil, nil, nil, nil, spellName, texture)
+      self:Display_Event("SHOWPOWER", string_format("+%d %s", extraAmount, string_nil(POWER_STRINGS[powerType])), nil, nil, nil, nil, nil, nil, spellName, texture)
     elseif fromPlayer then
       return
       --for showing your drain damage
-      --self:Display_Event("SHOWSPELL", string_format("%d %s", extraAmount, POWER_STRINGS[powerType]), nil, nil, nil, nil, nil, nil, spellName, texture)
+      --self:Display_Event("SHOWSPELL", string_format("%d %s", extraAmount, string_nil(POWER_STRINGS[powerType])), nil, nil, nil, nil, nil, nil, spellName, texture)
     end
   ------------power gains----------------
   elseif etype == "POWER" then
@@ -580,7 +588,7 @@ function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, source
     texture = select(3, GetSpellInfo(spellId))
     if (amount < db["MANAFILTER"]) then return end
     if toPlayer and (not db["SHOWALLPOWER"]) then
-      self:Display_Event("SHOWPOWER", string_format("+%d %s", amount, POWER_STRINGS[powerType]), nil, nil, nil, nil, nil, nil, spellName, texture)
+      self:Display_Event("SHOWPOWER", string_format("+%d %s", amount, string_nil(POWER_STRINGS[powerType])), nil, nil, nil, nil, nil, nil, spellName, texture)
     end
   ------------interrupts----------------
   elseif etype == "INTERRUPT" then
@@ -626,7 +634,7 @@ function SCT:COMBAT_TEXT_UPDATE(event, larg1, larg2, larg3)
     end
   elseif (larg1=="FACTION") then
     local sign = "+"
-		if (tonumber(larg3) < 0) then sign = "" end
+    if (tonumber(larg3) < 0) then sign = "" end
     self:Display_Event("SHOWREP", string_format("%s%d %s (%s)", sign, larg3, REPUTATION, larg2))
   elseif (larg1=="HONOR_GAINED") then
     self:Display_Event("SHOWHONOR", string_format("+%d %s", larg2, HONOR))
@@ -715,9 +723,9 @@ function SCT:Display_Event(option, msg1, crit, damagetype, resisted, target, msg
       msg1 = msg1.." ("..target..")"
     end
     --If they want to tag all self events
-  	if (db["SHOWSELF"]) then
-  		msg1 = SCT.LOCALS.SelfFlag..msg1..SCT.LOCALS.SelfFlag
-  	end
+    if (db["SHOWSELF"]) then
+      msg1 = SCT.LOCALS.SelfFlag..msg1..SCT.LOCALS.SelfFlag
+    end
     --if messages
     if (showmsg == SCT.MSG) then
       --if 2nd msg
