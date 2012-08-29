@@ -222,6 +222,7 @@ function SCT:OptionsFrame_OnShow()
   SCTOptionsFrame_DruidText:SetText(SCT.LOCALS.DRUID)
   SCTOptionsFrame_HunterText:SetText(SCT.LOCALS.HUNTER)
   SCTOptionsFrame_MageText:SetText(SCT.LOCALS.MAGE)
+  SCTOptionsFrame_MonkText:SetText(SCT.LOCALS.MONK)
   SCTOptionsFrame_PaladinText:SetText(SCT.LOCALS.PALADIN)
   SCTOptionsFrame_PriestText:SetText(SCT.LOCALS.PRIEST)
   SCTOptionsFrame_RogueText:SetText(SCT.LOCALS.ROGUE)
@@ -824,6 +825,7 @@ function SCT:CustomEventShow(option)
   SCTOptionsFrame_Druid:SetChecked(false)
   SCTOptionsFrame_Hunter:SetChecked(false)
   SCTOptionsFrame_Mage:SetChecked(false)
+  SCTOptionsFrame_Monk:SetChecked(false)
   SCTOptionsFrame_Paladin:SetChecked(false)
   SCTOptionsFrame_Priest:SetChecked(false)
   SCTOptionsFrame_Rogue:SetChecked(false)
@@ -840,6 +842,8 @@ function SCT:CustomEventShow(option)
         SCTOptionsFrame_Hunter:SetChecked(true)
       elseif class == SCT.LOCALS.MAGE then
         SCTOptionsFrame_Mage:SetChecked(true)
+      elseif class == SCT.LOCALS.MONK then
+        SCTOptionsFrame_Monk:SetChecked(true)
       elseif class == SCT.LOCALS.PALADIN then
         SCTOptionsFrame_Paladin:SetChecked(true)
       elseif class == SCT.LOCALS.PRIEST then
@@ -960,6 +964,9 @@ function SCT:CustomEventSave_OnClick()
     end
     if SCTOptionsFrame_Mage:GetChecked() then
       tinsert(class, SCT.LOCALS.MAGE)
+    end
+    if SCTOptionsFrame_Monk:GetChecked() then
+      tinsert(class, SCT.LOCALS.MONK)
     end
     if SCTOptionsFrame_Paladin:GetChecked() then
       tinsert(class, SCT.LOCALS.PALADIN)
