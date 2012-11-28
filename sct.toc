@@ -1,7 +1,7 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: ScrollingCombatText
 ## Notes: Adds Scrolling Combat Text above your character
-## Version: 6.6
+## Version: 6.61
 ## Author: Grayhoof
 ## SavedVariables: SCT_CONFIG, SCT_EVENT_CONFIG
 ## X-Website: http://grayhoof.wowinterface.com/
