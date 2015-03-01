@@ -73,6 +73,18 @@ local function string_nil(val)
   end
 end
 
+local function shortenValue(value)
+  if value >= 10000000 then
+    value = string_format("%.1fm", value / 1000000)
+  elseif value >= 1000000 then
+    value = string_format("%.2fm",value / 1000000)
+  elseif value >= 100000 then
+    value = string_format("%.0fk",value / 1000)
+  elseif value >= 10000 then
+    value = string_format("%.1fk",value / 1000)
+  end
+  return value
+end
 
 --combat log locals
 local CombatLog_Object_IsA = CombatLog_Object_IsA
@@ -492,7 +504,7 @@ function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, source
       spellId, spellName, spellSchool, amount, overDamage, school, resisted, blocked, absorbed, critical, glancing, crushing = select(1, ...)
       texture = select(3, GetSpellInfo(spellId))
     end
-    text = tostring(amount)
+    text = tostring(self:ShortenValue(amount))
 
     if toPlayer then
       if (amount < db["DMGFILTER"]) then return end
@@ -532,7 +544,7 @@ function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, source
     text = amount
     texture = select(3, GetSpellInfo(spellId))
 
-    healtot = tostring(amount)
+    healtot = tostring(self:ShortenValue(amount))
     --heal filter
     if (amount < db["HEALFILTER"]) then return end
 
@@ -548,7 +560,7 @@ function SCT:ParseCombat(larg1, timestamp, event, hideCaster, sourceGUID, source
     --outgoing heals
     elseif fromPlayer then
       if event == "SPELL_PERIODIC_HEAL" and (not db["SHOWHOTS"]) then return end
-      if (db["SHOWOVERHEAL"]) and overHeal > 0 then healtot = string_format("%d {%d}", amount-overHeal, overHeal) end
+      if (db["SHOWOVERHEAL"]) and overHeal > 0 then healtot = string_format("%d {%d}", self:ShortenValue(amount-overHeal), self:ShortenValue(overHeal)) end
       local healtext = destName..": +"..healtot
       if (db["NAMEPLATES"]) then parent = self:GetNameplate(self:CleanName(destName, destFlags)) end
       if parent then healtext = "+"..healtot end
@@ -663,9 +675,9 @@ function SCT:ParseReflect(timestamp, event, sourceGUID, sourceName, sourceFlags,
     local parent
     if (db["NAMEPLATES"]) then parent = self:GetNameplate(self:CleanName(destName, destFlags)) end
     if SCTD then
-      SCTD:DisplayText("SCTD_SHOWSPELL", string_format("%s: %d", REFLECT, amount), critical, SCHOOL_STRINGS[school], resisted, destName, spellName, texture, destFlags)
+      SCTD:DisplayText("SCTD_SHOWSPELL", string_format("%s: %d", REFLECT, self:ShortenValue(amount)), critical, SCHOOL_STRINGS[school], resisted, destName, spellName, texture, destFlags)
     else
-      self:Display_Event("SHOWABSORB", string_format("%s: %d (%s)", spellName, amount, REFLECT), critical,nil,nil,nil,nil,parent,nil,texture)
+      self:Display_Event("SHOWABSORB", string_format("%s: %d (%s)", spellName, self:ShortenValue(amount), REFLECT), critical,nil,nil,nil,nil,parent,nil,texture)
     end
     self:ClearReflect()
   end
@@ -1047,6 +1059,15 @@ function SCT:ShortenString(strString)
   else
     return strString
   end
+end
+
+------------------------------
+---Shorten an amount
+function SCT:ShortenValue(value)
+  if db["SHORTAMOUNT"] then
+    value = shortenValue(value)
+  end
+  return value
 end
 
 ------------------------
