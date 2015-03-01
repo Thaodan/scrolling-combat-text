@@ -272,6 +272,14 @@ end
 --Sets the silder values in the config
 function SCT:OptionsSliderOnValueChanged(slider, value)
   local text, editbox
+  -- start fix
+  if not slider._onsetting then   -- is single threaded 
+      slider._onsetting = true
+      slider:SetValue(slider:GetValue())
+      value = slider:GetValue()     -- cant use original 'value' parameter
+      slider._onsetting = false
+  else return end               -- ignore recursion for actual event handler
+  -- end fix
   text = _G[slider:GetName().."Text"]
   editbox = _G[slider:GetParent():GetName().."EditBox"]
   text:SetText(slider.SCTLabel)

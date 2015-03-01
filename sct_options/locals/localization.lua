@@ -58,7 +58,7 @@ SCT.LOCALS.OPTION_CHECK26 = { name = "Absorb", tooltipText = "The event must be 
 SCT.LOCALS.OPTION_CHECK27 = { name = "Glancing", tooltipText = "The event must be a Glancing hit to trigger"};
 SCT.LOCALS.OPTION_CHECK28 = { name = "Crushing", tooltipText = "The event must be a Crushing hit to trigger"};
 SCT.LOCALS.OPTION_CHECK29 = { name = "Self Only Debuffs", tooltipText = "If it is a Debuff gain, only trigger the event if the Debuff came from you. Only works for your target."};
-
+SCT.LOCALS.OPTION_CHECK30 = { name = "Shorten Amounts", tooltipText = "Shorten all amounts over 1000 to appear like:\n1.2k instead of 1221\n650k instead of 650199\n3.7m instead of 3700321\nEtc..."};
 
 --Slider options values
 SCT.LOCALS.OPTION_SLIDER1 = { name="Text Animation Speed", minText="Faster", maxText="Slower", tooltipText = "Controls the speed at which the text animation scrolls"};
@@ -73,11 +73,11 @@ SCT.LOCALS.OPTION_SLIDER9 = { name="Message Center X Position", minText="-600", 
 SCT.LOCALS.OPTION_SLIDER10 = { name="Message Center Y Position", minText="-400", maxText="400", tooltipText = "Controls the placement of the message center"};
 SCT.LOCALS.OPTION_SLIDER11 = { name="Message Fade Speed", minText="Faster", maxText="Slower", tooltipText = "Controls the speed that messages fade"};
 SCT.LOCALS.OPTION_SLIDER12 = { name="Message Size", minText="Smaller", maxText="Larger", tooltipText = "Controls the size of the message text"};
-SCT.LOCALS.OPTION_SLIDER13 = { name="Healer Filter", minText="0", maxText="500", tooltipText = "Controls the minimum amount a heal needs to heal you for to appear in SCT. Good for filtering out frequent small heals like Totems, Blessings, etc..."};
-SCT.LOCALS.OPTION_SLIDER14 = { name="Mana Filter", minText="0", maxText="500", tooltipText = "Controls the minimum amount a power gain needs to be to appear in SCT. Good for filtering out frequent small power gains like Totems, Blessings, etc..."};
+SCT.LOCALS.OPTION_SLIDER13 = { name="Healer Filter", minText="0", maxText="10000", tooltipText = "Controls the minimum amount a heal needs to heal you for to appear in SCT. Good for filtering out frequent small heals like Totems, Blessings, etc...\n\nNote: You can type ANY value next to the slider and hit enter if you like."};
+SCT.LOCALS.OPTION_SLIDER14 = { name="Mana Filter", minText="0", maxText="10000", tooltipText = "Controls the minimum amount a power gain needs to be to appear in SCT. Good for filtering out frequent small power gains like Totems, Blessings, etc...\n\nNote: You can type ANY value next to the slider and hit enter if you like."};
 SCT.LOCALS.OPTION_SLIDER15 = { name="HUD Gap Distance", minText="0", maxText="200", tooltipText = "Controls the distance from the center for the HUD animation. Useful when wanting to keep eveything centered but adjust the distance from center"};
 SCT.LOCALS.OPTION_SLIDER16 = { name="Shorten Spell Size", minText="1", maxText="30", tooltipText = "Spell names over this length will be shortend using the selected shorten type."};
-SCT.LOCALS.OPTION_SLIDER17 = { name="Damage Filter", minText="0", maxText="500", tooltipText = "Controls the minimum amount damage needs to be to appear in SCT. Good for filtering out frequent small hits like Damage Shields, Small DOT's, etc..."};
+SCT.LOCALS.OPTION_SLIDER17 = { name="Damage Filter", minText="0", maxText="10000", tooltipText = "Controls the minimum amount damage needs to be to appear in SCT. Good for filtering out frequent small hits like Damage Shields, Small DOT's, etc...\n\nNote: You can type ANY value next to the slider and hit enter if you like."};
 SCT.LOCALS.OPTION_SLIDER18 = { name="Aura Count", minText="0", maxText="20", tooltipText = "Number of buff or debuff count need to trigger the event. 0 means any amount"};
 
 --Spell Color options

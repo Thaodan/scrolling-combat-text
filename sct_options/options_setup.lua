@@ -61,6 +61,7 @@ SCT.OPTIONS.FrameCheckButtons [SCT.LOCALS.OPTION_CHECK26.name] = { index = 26, t
 SCT.OPTIONS.FrameCheckButtons [SCT.LOCALS.OPTION_CHECK27.name] = { index = 27, tooltipText = SCT.LOCALS.OPTION_CHECK27.tooltipText};
 SCT.OPTIONS.FrameCheckButtons [SCT.LOCALS.OPTION_CHECK28.name] = { index = 28, tooltipText = SCT.LOCALS.OPTION_CHECK28.tooltipText};
 SCT.OPTIONS.FrameCheckButtons [SCT.LOCALS.OPTION_CHECK29.name] = { index = 29, tooltipText = SCT.LOCALS.OPTION_CHECK29.tooltipText};
+SCT.OPTIONS.FrameCheckButtons [SCT.LOCALS.OPTION_CHECK30.name] = { index = 30, tooltipText = SCT.LOCALS.OPTION_CHECK30.tooltipText, SCTVar = "SHORTAMOUNT"};
 
 --Slider options values
 SCT.OPTIONS.FrameSliders = { };
@@ -76,11 +77,11 @@ SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER9.name] = { index = 9, SCTVar 
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER10.name] = { index = 10, SCTVar = "MSGYOFFSET", minValue = -400, maxValue = 400, valueStep = 10, minText=SCT.LOCALS.OPTION_SLIDER10.minText, maxText=SCT.LOCALS.OPTION_SLIDER10.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER10.tooltipText, SCTTable = SCT.MSG};
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER11.name] = { index = 11, SCTVar = "MSGFADE", minValue = 1, maxValue = 3, valueStep = .5, minText=SCT.LOCALS.OPTION_SLIDER11.minText, maxText=SCT.LOCALS.OPTION_SLIDER11.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER11.tooltipText, SCTTable = SCT.MSG};
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER12.name] = { index = 12, SCTVar = "MSGSIZE", minValue = 8, maxValue = 32, valueStep = 1, minText=SCT.LOCALS.OPTION_SLIDER12.minText, maxText=SCT.LOCALS.OPTION_SLIDER12.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER12.tooltipText, SCTTable = SCT.MSG};
-SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER13.name] = { index = 13, SCTVar = "HEALFILTER", minValue = 0, maxValue = 500, valueStep = 25, minText=SCT.LOCALS.OPTION_SLIDER13.minText, maxText=SCT.LOCALS.OPTION_SLIDER13.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER13.tooltipText};
-SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER14.name] = { index = 14, SCTVar = "MANAFILTER", minValue = 0, maxValue = 500, valueStep = 25, minText=SCT.LOCALS.OPTION_SLIDER14.minText, maxText=SCT.LOCALS.OPTION_SLIDER14.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER14.tooltipText};
+SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER13.name] = { index = 13, SCTVar = "HEALFILTER", minValue = 0, maxValue = 10000, valueStep = 100, minText=SCT.LOCALS.OPTION_SLIDER13.minText, maxText=SCT.LOCALS.OPTION_SLIDER13.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER13.tooltipText};
+SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER14.name] = { index = 14, SCTVar = "MANAFILTER", minValue = 0, maxValue = 10000, valueStep = 100, minText=SCT.LOCALS.OPTION_SLIDER14.minText, maxText=SCT.LOCALS.OPTION_SLIDER14.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER14.tooltipText};
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER15.name] = { index = 15, SCTVar = "GAPDIST", minValue = 0, maxValue = 200, valueStep = 10, minText=SCT.LOCALS.OPTION_SLIDER15.minText, maxText=SCT.LOCALS.OPTION_SLIDER15.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER15.tooltipText, SCTTable = SCT.FRAME1};
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER16.name] = { index = 16, SCTVar = "TRUNCATESIZE", minValue = 1, maxValue = 30, valueStep = 1, minText=SCT.LOCALS.OPTION_SLIDER16.minText, maxText=SCT.LOCALS.OPTION_SLIDER16.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER16.tooltipText};
-SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER17.name] = { index = 17, SCTVar = "DMGFILTER", minValue = 0, maxValue = 500, valueStep = 25, minText=SCT.LOCALS.OPTION_SLIDER17.minText, maxText=SCT.LOCALS.OPTION_SLIDER17.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER17.tooltipText};
+SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER17.name] = { index = 17, SCTVar = "DMGFILTER", minValue = 0, maxValue = 10000, valueStep = 100, minText=SCT.LOCALS.OPTION_SLIDER17.minText, maxText=SCT.LOCALS.OPTION_SLIDER17.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER17.tooltipText};
 SCT.OPTIONS.FrameSliders [SCT.LOCALS.OPTION_SLIDER18.name] = { index = 18, minValue = 0, maxValue = 20, valueStep = 1, minText=SCT.LOCALS.OPTION_SLIDER18.minText, maxText=SCT.LOCALS.OPTION_SLIDER18.maxText, tooltipText = SCT.LOCALS.OPTION_SLIDER18.tooltipText};
 
 --Color options

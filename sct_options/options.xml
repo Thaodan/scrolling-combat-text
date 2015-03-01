@@ -148,9 +148,9 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<EditBox name="$parentEditBox" letters="5" autoFocus="false" inherits="InputBoxTemplate">
+			<EditBox name="$parentEditBox" letters="10" autoFocus="false" inherits="InputBoxTemplate">
 				<Size>
-					<AbsDimension x="30" y="16"/>
+					<AbsDimension x="50" y="16"/>
 				</Size>
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parentSlider" relativePoint="RIGHT">
@@ -1368,7 +1368,7 @@
 		             <Anchors>
 		                <Anchor point="TOP" relativeTo="SCTOptionsFrame_Misc13" relativePoint="BOTTOM">
 		                    <Offset>
-		                        <AbsDimension x="0" y="-100"/>
+		                        <AbsDimension x="0" y="-120"/>
 		                    </Offset>
 		                </Anchor>
 		            </Anchors>
@@ -1437,11 +1437,21 @@
 						</Anchors>
 					</CheckButton>
 
+					<CheckButton name="SCTOptionsFrame_CheckButton30" inherits="SCTCheckTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SCTOptionsFrame_CheckButton16" relativePoint="TOPLEFT">
+								<Offset>
+									<AbsDimension x="0" y="-25" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+					</CheckButton>
+
 					<CheckButton name="SCTOptionsFrame_CheckButton11" inherits="SCTCheckTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT" relativeTo="SCTOptions_AnimationFrame" relativePoint="TOPLEFT">
 								<Offset>
-									<AbsDimension x="50" y="-145" />
+									<AbsDimension x="50" y="-165" />
 								</Offset>
 							</Anchor>
 						</Anchors>
