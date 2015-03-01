@@ -199,6 +199,17 @@ local power = {
   [SPELL_POWER_FOCUS] = FOCUS,
   [SPELL_POWER_ENERGY] = ENERGY,
   --[SPELL_POWER_HAPPINESS] = HAPPINESS_POINTS,
+  [SPELL_POWER_RUNES] = RUNES,
+  [SPELL_POWER_RUNIC_POWER] = RUNIC_POWER,
+  [SPELL_POWER_SOUL_SHARDS] = SHARDS,
+  [SPELL_POWER_ECLIPSE] = ECLIPSE,
+  [SPELL_POWER_HOLY_POWER] = HOLY_POWER,
+  --[SPELL_POWER_ALTERNATE_POWER] = UNKNOWN,
+  --[SPELL_POWER_DARK_FORCE] = UNKNOWN,
+  [SPELL_POWER_CHI] = CHI_POWER,
+  [SPELL_POWER_SHADOW_ORBS] = SHADOW_ORBS,
+  [SPELL_POWER_BURNING_EMBERS] = BURNING_EMBERS,
+  [SPELL_POWER_DEMONIC_FURY] = DEMONIC_FURY,
   [0] = "모두",
 }
 
@@ -207,7 +218,7 @@ SCT.LOCALS.OPTION_CUSTOMSELECTION1 = { name="이벤트 유형", tooltipText = "�
 SCT.LOCALS.OPTION_CUSTOMSELECTION2 = { name="대상", tooltipText = "누구에게 생긴 이벤트 인지 선택합니다.", table = flags};
 SCT.LOCALS.OPTION_CUSTOMSELECTION3 = { name="제공자", tooltipText = "이벤트를 사용한 자를 선택합니다.", table = flags};
 SCT.LOCALS.OPTION_CUSTOMSELECTION4 = { name="이벤트 프레임", tooltipText = "이 이벤트를 어느 프레임에 표시할 것인지 선택합니다.", table = frames};
-SCT.LOCALS.OPTION_CUSTOMSELECTION5 = { name="빚맞힘 유형", tooltipText = "빚맞힘 유형을 선택합니다.", table = misses};
+SCT.LOCALS.OPTION_CUSTOMSELECTION5 = { name="빗맞힘 유형", tooltipText = "빗맞힘 유형을 선택합니다.", table = misses};
 SCT.LOCALS.OPTION_CUSTOMSELECTION6 = { name="파워 유형", tooltipText = "파워 유형을 선택합니다.", table = power};
 
 --EditBox options

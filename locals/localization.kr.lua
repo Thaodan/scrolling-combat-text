@@ -22,7 +22,7 @@ SCT.LOCALS.FiveCPMessage = "마무리!"; -- Message to be displayed when you hav
 SCT.LOCALS.ExtraAttack = "추가 공격!"; -- Message to be displayed when time to execute
 SCT.LOCALS.KillingBlow = "+결정타+"; -- Message to be displayed when you kill something
 SCT.LOCALS.Interrupted = "중단!"; -- Message to be displayed when you are interrupted
-SCT.LOCALS.Dispel = "제거!"; -- Message to be displayed when you dispel
+SCT.LOCALS.Dispel = "해제!"; -- Message to be displayed when you dispel
 SCT.LOCALS.DispelFailed = "해제 실패!"; -- Message to be displayed when your dispel failed
 SCT.LOCALS.Rampage = "광란!"; -- Message to be displayed when rampage is needed
 
@@ -46,6 +46,7 @@ SCT.LOCALS.WARRIOR = "전사";
 SCT.LOCALS.ROGUE = "도적";
 SCT.LOCALS.HUNTER = "사냥꾼";
 SCT.LOCALS.MAGE = "마법사";
+SCT.LOCALS.MONK = "수도사";
 SCT.LOCALS.WARLOCK = "흑마법사";
 SCT.LOCALS.DRUID = "드루이드";
 SCT.LOCALS.PRIEST = "사제";
