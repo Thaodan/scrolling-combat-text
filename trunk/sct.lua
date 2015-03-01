@@ -908,6 +908,7 @@ function SCT:GetDefaultConfig()
       ["TRUNCATESIZE"] = 30,
       ["WOWHEAL"] = 1,
       ["ICON"] = 1,
+      ["SHORTAMOUNT"] = 1,
       [SCT.FRAMES_DATA_TABLE] = {
         [SCT.FRAME1] = {
           ["FONT"] = "Friz Quadrata TT",
