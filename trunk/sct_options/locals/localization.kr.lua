@@ -66,7 +66,7 @@ SCT.LOCALS.OPTION_CHECK26 = { name = "부분 흡수", tooltipText = "이 이벤�
 SCT.LOCALS.OPTION_CHECK27 = { name = "감소", tooltipText = "이 이벤트는 피해량이 감소할 때만 표시합니다."};
 SCT.LOCALS.OPTION_CHECK28 = { name = "강타", tooltipText = "이 이벤트는 강타일 때만 표시합니다."};
 SCT.LOCALS.OPTION_CHECK29 = { name = "자신의 디버프", tooltipText = "디버프를 걸었을 때, 플레이어의 디버프만 표시합니다(반드시 대상에게만 표시됩니다.)."};
-
+SCT.LOCALS.OPTION_CHECK30 = { name = "숫자 짧게 표시", tooltipText = "1000 이상되는 양의 숫자를 짧게 표시합니다.\n1221 대신에 1.2k\n650199 대신에 650k\n3700321 대신에 3.7m"};
 
 --Slider options values
 SCT.LOCALS.OPTION_SLIDER1 = { name="메시지 스크롤 속도조정", minText="빠름", maxText="느림", tooltipText = "메시지 스크롤 속도를 조정합니다."};
@@ -81,11 +81,11 @@ SCT.LOCALS.OPTION_SLIDER9 = { name="메시지 X 좌표 위치", minText="-600", 
 SCT.LOCALS.OPTION_SLIDER10 = { name="메시지 Y 좌표 위치", minText="-400", maxText="400", tooltipText = "메시지 표시 세로 위치를 조정합니다."};
 SCT.LOCALS.OPTION_SLIDER11 = { name="메시지 사라짐 속도", minText="빠름", maxText="느림", tooltipText = "메시지가 사라질 때 속도를 조정합니다."};
 SCT.LOCALS.OPTION_SLIDER12 = { name="메시지 크기", minText="작게", maxText="크게", tooltipText = "메시지의 크기를 조정합니다."};
-SCT.LOCALS.OPTION_SLIDER13 = { name="치유 필터링", minText="0", maxText="500", tooltipText = "SCT 메시지로 캐릭터의 치유량 표시를 설정합니다. 토템이나 축복같은 작은 치유등 빈번한 치유량을 설정하는데 유용합니다."};
-SCT.LOCALS.OPTION_SLIDER14 = { name="마나 필터링", minText="0", maxText="500", tooltipText = "SCT로 마나 회복량 표시를 설정합니다. 토템이나 축복같은 작은 마나 회복등 빈번한 마나량을 체크하는데 유용합니다."};
+SCT.LOCALS.OPTION_SLIDER13 = { name="치유 필터링", minText="0", maxText="10000", tooltipText = "SCT 메시지로 캐릭터의 치유량 표시를 설정합니다. 토템이나 축복같은 작은 치유등 빈번한 치유량을 설정하는데 유용합니다."};
+SCT.LOCALS.OPTION_SLIDER14 = { name="마나 필터링", minText="0", maxText="10000", tooltipText = "SCT로 마나 회복량 표시를 설정합니다. 토템이나 축복같은 작은 마나 회복등 빈번한 마나량을 체크하는데 유용합니다."};
 SCT.LOCALS.OPTION_SLIDER15 = { name="HUD 간격", minText="0", maxText="200", tooltipText = "HUD 움직임에서의 왼쪽 오른쪽과의 거리를 설정합니다. 양쪽의 HUD 거리를 다르게 하여 메시지를 알아보기 쉽게 합니다."};
 SCT.LOCALS.OPTION_SLIDER16 = { name="짧은 주문 길이", minText="1", maxText="30", tooltipText = "주문 이름을 전체를 표시하지 않고 짧게 표시합니다."};
-SCT.LOCALS.OPTION_SLIDER17 = { name="공격력 필터링", minText="0", maxText="500", tooltipText = "SCT 메시지로 표시할 최소 공격력을 설정합니다. 주기적인 공격력으로 피해 방어량, 작은 도트류를 필터링하는데 좋습니다."};
+SCT.LOCALS.OPTION_SLIDER17 = { name="공격력 필터링", minText="0", maxText="10000", tooltipText = "SCT 메시지로 표시할 최소 공격력을 설정합니다. 주기적인 공격력으로 피해 방어량, 작은 도트류를 필터링하는데 좋습니다."};
 SCT.LOCALS.OPTION_SLIDER18 = { name="효과 갯수", minText="0", maxText="20", tooltipText = "버프 및 디버프의 갯수를 표시합니다. 0 은 모든 개수를 표시합니다."};
 
 --Spell Color options
