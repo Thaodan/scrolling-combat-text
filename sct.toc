@@ -1,4 +1,4 @@
-## Interface: 60200
+## Interface: 70000
 ## Title: ScrollingCombatText
 ## Notes: Adds Scrolling Combat Text above your character
 ## Version: 6.72
