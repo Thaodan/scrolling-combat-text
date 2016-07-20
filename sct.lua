@@ -53,7 +53,6 @@ local PlaySoundFile = PlaySoundFile
 local GetNumRaidMembers = GetNumRaidMembers
 local GetNumPartyMembers = GetNumPartyMembers
 local GetSpellInfo = GetSpellInfo
-local GetRuneType = GetRuneType
 
 --LUA calls
 local pairs = pairs
@@ -161,18 +160,19 @@ local POWER_STRINGS = {
   [SPELL_POWER_RAGE] = RAGE,
   [SPELL_POWER_FOCUS] = FOCUS,
   [SPELL_POWER_ENERGY] = ENERGY,
-  --[SPELL_POWER_CHI] = CHI_POWER,
+  [SPELL_POWER_COMBO_POINTS] = COMBO_POINTS,
   [SPELL_POWER_RUNES] = RUNES,
   [SPELL_POWER_RUNIC_POWER] = RUNIC_POWER,
   [SPELL_POWER_SOUL_SHARDS] = SHARDS,
-  [SPELL_POWER_ECLIPSE] = ECLIPSE,
   [SPELL_POWER_HOLY_POWER] = HOLY_POWER,
   [SPELL_POWER_ALTERNATE_POWER] = UNKNOWN,
-  [SPELL_POWER_DARK_FORCE] = UNKNOWN,
   [SPELL_POWER_CHI] = CHI_POWER,
-  [SPELL_POWER_SHADOW_ORBS] = SHADOW_ORBS,
-  [SPELL_POWER_BURNING_EMBERS] = BURNING_EMBERS,
-  [SPELL_POWER_DEMONIC_FURY] = DEMONIC_FURY,
+  [SPELL_POWER_MAELSTROM] = MAELSTROM_POWER,
+  [SPELL_POWER_ARCANE_CHARGES] = ARCANE_CHARGES_POWER,
+  [SPELL_POWER_LUNAR_POWER] = SPELL_POWER_LUNAR_POWER,
+  [SPELL_POWER_INSANITY] = INSANITY_POWER,
+  [SPELL_POWER_FURY] = FURY,
+  [SPELL_POWER_PAIN] = PAIN,
 }
 
 local SHADOW_STRINGS = {
@@ -182,15 +182,10 @@ local SHADOW_STRINGS = {
 }
 
 local RUNETYPE_BLOOD = 1;
-local RUNETYPE_UNHOLY = 2;
-local RUNETYPE_FROST = 3;
-local RUNETYPE_DEATH = 4
+
 
 local RUNE_STRINGS = {
   [RUNETYPE_BLOOD] = {text = COMBAT_TEXT_RUNE_BLOOD, icon = "Interface\\PlayerFrame\\UI-PlayerFrame-Deathknight-Blood", color = {r=.75,g=0,b=0}},
-  [RUNETYPE_UNHOLY] = {text = COMBAT_TEXT_RUNE_UNHOLY, icon = "Interface\\PlayerFrame\\UI-PlayerFrame-Deathknight-Unholy", color = {r=.5,g=.6,b=.5}},
-  [RUNETYPE_FROST] = {text = COMBAT_TEXT_RUNE_FROST, icon = "Interface\\PlayerFrame\\UI-PlayerFrame-Deathknight-Frost", color = {r=0,g=.75,b=1}},
-  [RUNETYPE_DEATH] = {text = TUTORIAL_TITLE25.." "..RUNES, icon = "Interface\\PlayerFrame\\UI-PlayerFrame-Deathknight-Death", color = {r=1,g=.75,b=0}},
 }
 
 ----------------------
@@ -373,12 +368,11 @@ function SCT:RUNE_POWER_UPDATE(event, ...)
     local rune, usable = ...
     local crit = db[self.CRITS_TABLE]["SHOWRUNES"]
     local showmsg = db[self.FRAMES_TABLE]["SHOWRUNES"] or 1
-    rune = GetRuneType(rune)
     if usable and rune then
       if (showmsg == SCT.MSG) then
-        self:DisplayMessage(RUNE_STRINGS[rune].text, RUNE_STRINGS[rune].color, RUNE_STRINGS[rune].icon)
+        self:DisplayMessage(RUNE_STRINGS[RUNETYPE_BLOOD].text, RUNE_STRINGS[RUNETYPE_BLOOD].color, RUNE_STRINGS[RUNETYPE_BLOOD].icon)
       else
-        self:DisplayCustomEvent(RUNE_STRINGS[rune].text, RUNE_STRINGS[rune].color, crit, showmsg, nil, RUNE_STRINGS[rune].icon)
+        self:DisplayCustomEvent(RUNE_STRINGS[RUNETYPE_BLOOD].text, RUNE_STRINGS[RUNETYPE_BLOOD].color, crit, showmsg, nil, RUNE_STRINGS[RUNETYPE_BLOOD].icon)
       end
     end
   end
@@ -1074,9 +1068,6 @@ end
 ------------------------
 --Setup Healing Flags based on Options
 function SCT:SetHealingFlags()
-  local ver,build,date = GetBuildInfo()
-  if (tonumber(build) <= 6546) then return end
-  --set WoW Healing Flags
   if (SCT.db.profile["WOWHEAL"]) then
     SetCVar("CombatHealing", 0)
   else
